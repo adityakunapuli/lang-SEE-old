@@ -4,16 +4,17 @@
     "test": "node bin/cm.js test",
     "test-node": "node bin/cm.js test --no-browser",
     "prepare": "node bin/cm.js build",
-    "dev": "node bin/cm.js devserver"
+    "dev": "node bin/cm.js devserver",
+    "rollup": "rollup -c lang-example/rollup.config.js"
   },
   "author": "Marijn Haverbeke <marijnh@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "@codemirror/buildhelper": "^0.1.5",
+    "builddocs": "^1.0.0",
     "esmoduleserve": "^0.2.0",
-    "serve-static": "^1.14.1",
     "getdocs-ts": "^0.1.0",
-    "builddocs": "^1.0.0"
+    "serve-static": "^1.14.1"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,8 @@
   "workspaces": [
     "*"
   ],
-  "private": true
+  "private": true,
+  "dependencies": {
+    "rollup-plugin-ts": "^3.0.2"
+  }
 }

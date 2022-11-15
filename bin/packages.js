@@ -14,22 +14,22 @@ exports.core = [
 ]
 exports.nonCore = [
   "lang-javascript",
-  "lang-java",
-  "lang-json",
-  "lang-cpp",
-  "lang-php",
-  "lang-python",
-  "lang-css",
-  "lang-html",
-  "lang-sql",
-  "lang-rust",
-  "lang-xml",
-  "lang-markdown",
-  "lang-lezer",
-  "lang-wast",
-  "legacy-modes",
-  "theme-one-dark",
-  "merge"
+  // "lang-java",
+  // "lang-json",
+  // "lang-cpp",
+  // "lang-php",
+  // "lang-python",
+  // "lang-css",
+  // "lang-html",
+  // "lang-sql",
+  // "lang-rust",
+  // "lang-xml",
+  // "lang-markdown",
+  // "lang-lezer",
+  // "lang-wast",
+  // "legacy-modes",
+  // "theme-one-dark",
+  // "merge"
 ]
 
 exports.all = exports.core.concat(exports.nonCore)
