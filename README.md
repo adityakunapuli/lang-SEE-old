@@ -1,3 +1,20 @@
+
+# Structured English Editor language template for Code Mirror 6
+
+```bash
+# After cloning repo...
+node bin/cm.js install
+
+cd lang-example
+
+npm run prepare
+
+cd ..
+
+npm run dev
+```
+
+
 # CodeMirror
 
 [![Build Status](https://github.com/codemirror/dev/workflows/main/badge.svg)](https://github.com/codemirror/codemirror.next/actions)
