@@ -1,0 +1,19 @@
+src: [
+    {'CREATE': 'CREATE'},
+    {'CREATE': 'ENDCREATE'},
+    {'FORM': 'FORM'},
+    {'FORM': 'ENDFORM'},
+    {'VALIDATION': 'VALIDATION'},
+    {'VALIDATION': 'ENDVALIDATION'},
+    {'GIVEN': 'GIVEN'},
+    {'GIVEN': 'ENDGIVEN'},
+    {'IF': 'IF'},
+    {'IF': 'OR'},
+    {'IF': 'AND'},
+    {'IF': 'END'},
+    {'IF': 'SET'}
+],
+
+keys: ['CREATE', 'FORM','ENDFORM','VALIDATION','GIVEN','ENDGIVEN','IF','AND','OR','SET','DISPLAY MSG','END','ENDVALIDATION','ENDCREATE']
+
+[{'CREATE': 'CREATE'}, {'CREATE': 'ENDCREATE'}, {'FORM': 'FORM'}, {'FORM': 'ENDFORM'}, {'VALIDATION': 'VALIDATION'}, {'VALIDATION': 'ENDVALIDATION'}, {'GIVEN': 'GIVEN'}, {'GIVEN': 'ENDGIVEN'}, {'IF': 'IF'}, {'IF': 'OR'}, {'IF': 'AND'}, {'IF': 'END'}, {'IF': 'SET'}, {'ENDGIVEN': 'ENDGIVEN'}, {'AND': 'AND'}, {'ENDFORM': 'ENDFORM'}, {'END': 'END'}, {'ENDCREATE': 'ENDCREATE'}, {'ENDVALIDATION': 'ENDVALIDATION'}, {'OR': 'OR'}, {'SET': 'SET'}]

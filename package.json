@@ -1,30 +1,34 @@
 {
-  "description": "Development environment for the CodeMirror 6 packages",
-  "scripts": {
-    "test": "node bin/cm.js test",
-    "test-node": "node bin/cm.js test --no-browser",
-    "prepare": "node bin/cm.js build",
-    "dev": "node bin/cm.js devserver",
-    "rollup": "rollup -c lang-example/rollup.config.js"
-  },
-  "author": "Marijn Haverbeke <marijnh@gmail.com>",
-  "license": "MIT",
-  "devDependencies": {
-    "@codemirror/buildhelper": "^0.1.5",
-    "builddocs": "^1.0.0",
-    "esmoduleserve": "^0.2.0",
-    "getdocs-ts": "^0.1.0",
-    "serve-static": "^1.14.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/codemirror/dev.git"
-  },
-  "workspaces": [
-    "*"
-  ],
-  "private": true,
-  "dependencies": {
-    "rollup-plugin-ts": "^3.0.2"
-  }
+    "description": "Development environment for the CodeMirror 6 packages",
+    "scripts": {
+        "test": "node bin/cm.js test",
+        "test-node": "node bin/cm.js test --no-browser",
+        "prepare": "node bin/cm.js build",
+        "dev": "node bin/cm.js devserver",
+        "rollup": "rollup -c lang-example/rollup.config.js",
+        "rollup2": "cd lang-example && lezer-generator src/syntax.grammar -o src/parser && npm run prepare && cd ..",
+        "build": "npm run rollup2 && npm run dev"
+    },
+    "author": "Marijn Haverbeke <marijnh@gmail.com>",
+    "license": "MIT",
+    "devDependencies": {
+        "@codemirror/buildhelper": "^0.1.5",
+        "builddocs": "^1.0.0",
+        "esmoduleserve": "^0.2.0",
+        "getdocs-ts": "^0.1.0",
+        "serve-static": "^1.14.1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/codemirror/dev.git"
+    },
+    "workspaces": [
+        "*"
+    ],
+    "private": true,
+    "dependencies": {
+        "@codemirror/highlight": "^0.19.8",
+        "@codemirror/theme-one-dark": "^6.1.0",
+        "rollup-plugin-ts": "^3.0.2"
+    }
 }

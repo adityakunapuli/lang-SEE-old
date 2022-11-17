@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css?family=Baloo+2:wght@400;500;600;');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+textarea#autoComplete {
+    height: 5vw;
+}
+
+
+a.navbar-brand {
+    justify-content: center;
+    width: 100%;
+    margin: auto;
+    max-height: 100px;
+    vertical-align: middle;
+    font-size: 2.5em;
+    font-family: "Baloo 2", serif;
+    display: flex;
+    align-items: center;
+    letter-spacing: 5px;
+}
+
+.form-control {
+    font-family: "Open Sans", serif;
+}
+
+.vl {
+    margin: 0 10px;
+    border-left: 1px solid white;
+    height: 1.5em;
+    max-height: 100%;
+}
+
+.autoComplete_wrapper {
+    width: 100%;
+}
+
+.mark, mark {
+    padding: 0 !important;
+    background-color: #fcf8e3;
+}
+
+.img.d-inline-block.align-top.logo-color {
+
+}
+
+div#showText {
+    border: dashed 1px grey;
+    border-radius: 6px;
+    padding: 1em;
+    margin-top: 1em;
+    white-space: pre-wrap;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif !important;
+    max-width: 640px !important;
+}
+
+.simple-container {
+    max-width: 675px;
+    margin: 0 auto;
+    padding-top: 70px;
+    padding-bottom: 20px;
+}
+
+.simple-print {
+    fill: white;
+    stroke: white;
+}
+
+.simple-print svg {
+    height: 100%;
+}
+
+.simple-close {
+    color: white;
+    border-color: white;
+}
+
+.simple-ext-info {
+    border-top: 1px solid #aaa;
+}
+
+p {
+    font-size: 16px;
+}
+
+h1 {
+    font-size: 30px;
+    line-height: 34px;
+}
+
+h2 {
+    font-size: 20px;
+    line-height: 25px;
+}
+
+h3 {
+    font-size: 16px;
+    line-height: 27px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #D8D8D8;
+    border-top: 1px solid #D8D8D8;
+}
+
+hr {
+    height: 1px;
+    background-color: #d8d8d8;
+    border: none;
+    width: 100%;
+    margin: 0px;
+}
+
+a[href] {
+    color: #1e8ad6;
+}
+
+a[href]:hover {
+    color: #3ba0e6;
+}
+
+img {
+    max-width: 100%;
+}
+
+li {
+    line-height: 1.5em;
+}
+
+aside,
+[class *= "sidebar"],
+[id *= "sidebar"] {
+    max-width: 90%;
+    margin: 0 auto;
+    border: 1px solid lightgrey;
+    padding: 5px 15px;
+}
+
+@media (min-width: 1921px) {
+    body {
+        font-size: 18px;
+    }
+}

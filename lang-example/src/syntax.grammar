@@ -11,15 +11,10 @@ expression {
 
 @tokens {
   Identifier { $[a-zA-Z_\-0-9]+ }
-
   String { '"' (!["\\] | "\\" _)* '"' }
-
   Boolean { "#t" | "#f" }
-
-  LineComment { ";" ![\n]* }
-
+  LineComment { "#" ![\n]* }
   space { $[ \t\n\r]+ }
-
   "(" ")"
 }
 
