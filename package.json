@@ -1,14 +1,15 @@
 {
     "description"    : "Development environment for the CodeMirror 6 packages",
     "scripts"        : {
-        "test"     : "node bin/cm.js test",
-        "test-node": "node bin/cm.js test --no-browser",
-        "prepare"  : "node bin/cm.js build",
-        "dev"      : "node bin/cm.js devserver",
-        "rollup"   : "rollup -c lang-example/rollup.config.js",
-        "rollup2"  : "cd lang-example && lezer-generator src/syntax.grammar -o src/parser && npm run prepare && cd ..",
-        "build"    : "npm run rollup2 && npm run dev",
-        "lezer"    : "cd lang-example/src && lezer-generator syntax.grammar -o parser.js # generates parser.terms.js"
+        "test"        : "node bin/cm.js test",
+        "test-node"   : "node bin/cm.js test --no-browser",
+        "prepare"     : "node bin/cm.js build",
+        "dev"         : "node bin/cm.js devserver",
+        "rollup"      : "rollup -c lang-example/rollup.config.js",
+        "rollup2"     : "cd lang-example && lezer-generator src/syntax.grammar -o src/parser && npm run prepare && cd ..",
+        "build"       : "npm run rollup2 && npm run dev",
+        "rebuild_lang": "npm run lezer",
+        "lezer"       : "cd lang-example/src && lezer-generator syntax.grammar -o parser.js # generates parser.terms.js"
     },
     "author"         : "Aditya Kunapuli (adikunapuli@gmail.com)",
     "license"        : "MIT",
