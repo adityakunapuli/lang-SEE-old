@@ -1,6 +1,33 @@
 @import url('https://fonts.googleapis.com/css?family=Baloo+2:wght@400;500;600;');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
+:root {
+    --editor-width: 640px;
+    --angle: 135deg;
+}
+
+.editor {
+    max-width: var(--editor-width);
+}
+
+html {
+background: #BBD2C5;  /* fallback for old browsers */
+background: -webkit-linear-gradient(var(--angle), #292E49, #536976, #BBD2C5);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(var(--angle), #181c31, #58636c , #bbe9c5 150%);
+
+/*background: #F0F2F0;  !* fallback for old browsers *!*/
+/*background: -webkit-linear-gradient(to right, #000C40, #F0F2F0);  !* Chrome 10-25, Safari 5.1-6 *!*/
+/*background: linear-gradient(to right, #000C40, #F0F2F0); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
+
+/*background-image: linear-gradient( var(--angle), #3B2667 15%, #BC78EC 100%);*/
+
+    height: 100%;
+}
+
+.body {
+    background: transparent;
+}
+
 textarea#autoComplete {
     height: 5vw;
 }
@@ -8,15 +35,16 @@ textarea#autoComplete {
 
 a.navbar-brand {
     justify-content: center;
-    width: 100%;
-    margin: auto;
+    width: var(--editor-width);
     max-height: 100px;
+    margin: auto;
     vertical-align: middle;
-    font-size: 2.5em;
+    font-size: 2.3em;
     font-family: "Baloo 2", serif;
     display: flex;
     align-items: center;
     letter-spacing: 5px;
+    /*color: var()*/
 }
 
 .form-control {
@@ -118,7 +146,7 @@ hr {
 }
 
 a[href] {
-    color: #1e8ad6;
+    color: #fff;
 }
 
 a[href]:hover {

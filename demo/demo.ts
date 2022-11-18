@@ -1,10 +1,7 @@
 import {basicSetup, EditorView} from "codemirror"
-import {keymap} from '@codemirror/view'
 import {completions, SEE} from "../lang-example"
-import {HighlightStyle, indentOnInput, syntaxHighlighting} from '@codemirror/language'
+import {HighlightStyle, syntaxHighlighting} from '@codemirror/language'
 import {oneDarkTheme} from '@codemirror/theme-one-dark'
-import {defaultKeymap} from '@codemirror/commands'
-
 import {tags} from "@lezer/highlight"
 
 import {autocompletion} from "@codemirror/autocomplete"
@@ -29,12 +26,12 @@ function myCompletions(context: { matchBefore: (arg0: RegExp) => any; explicit: 
 ;(window as any).view = new EditorView({
     doc: '',
     extensions: [
-        indentOnInput(),
-        keymap.of([...defaultKeymap,]),
-        oneDarkTheme,
-        basicSetup,
-        autocompletion({override: [myCompletions]}),
         SEE(),
+        // indentOnInput(),
+        // keymap.of([...defaultKeymap,]),
+        basicSetup,
+        oneDarkTheme,
+        autocompletion({override: [myCompletions]}),
         syntaxHighlighting(myHighlightStyle)
     ],
     parent: document.querySelector("#editor")!

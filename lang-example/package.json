@@ -4,7 +4,8 @@
   "description": "EXAMPLE language support for CodeMirror",
   "scripts": {
     "test": "mocha test/test.js",
-    "prepare": "rollup -c"
+    "prepare": "rollup -c",
+    "lezer" : "lezer-generator src/sytnax.grammar -o src/parser"
   },
   "type": "module",
   "main": "dist/index.cjs",

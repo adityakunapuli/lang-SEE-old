@@ -25,13 +25,16 @@
 </head>
 
 
-<body class="container navbar-dark bg-dark text-light">
-<nav class="navbar navbar-dark text-grey">
+<body class="container text-light" style="background: transparent">
+<nav class="navbar text-grey">
     <a class="navbar-brand " href="#">
-        <img src="static/logo/logo.svg" height="70" class="d-inline-block align-top logo-color img-responsive"
+        <img src="static/logo/logo.svg"
+             height="70"
+             class="d-inline-block align-top logo-color img-responsive"
              alt="Plum">
         <div class="vl"></div>
-        Structured English Editor
+        Structured
+        English Editor
     </a>
 </nav>
 
@@ -39,21 +42,25 @@
 <div id="editor"></div>
 
 <script type=module src="_m/demo.js"></script>
-<!--<script type=module src="dist/index.js"></script>-->
 
 
-<!--<!doctype html>-->
-<!--<meta charset=utf8>-->
-<!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
-<!--<title>Plum</title>-->
+<script>
+    // let editor = document.querySelector('#editor');
+    // localStorage.setItem('text', '')
+    let editor
+    window.addEventListener('DOMContentLoaded', function () {
+        editor = document.querySelector('#editor > div > div.cm-scroller > div.cm-content')
+        editor.addEventListener("input", () => {
+            const text = editor.innerHTML;
+            localStorage.setItem("text", text);
+            console.log(localStorage.getItem("text"))
+        });
+        window.onload = () => {
+            if (editor != null) {
+                editor.innerHTML = localStorage.getItem("text") || "";
+            }
+        };
+    });
 
-<!--<style>-->
-<!--.cm-editor { height: 300px; border: 1px solid #ddd}-->
-<!--.cm-scroller { overflow: auto; }-->
-<!--</style>-->
 
-<!--<h1>CM6</h1>-->
-<!--<div id="editor"></div>-->
-
-<!--<script type=module src="_m/demo.js"></script>-->
-<!--&lt;!&ndash;<script type=module src="dist/index.js"></script>&ndash;&gt;-->
+</script>

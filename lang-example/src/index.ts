@@ -1,16 +1,36 @@
 import {parser} from "./syntax.grammar";
-import {delimitedIndent, foldInside, foldNodeProp, indentNodeProp, LanguageSupport, LRLanguage} from "@codemirror/language";
+import {foldInside, foldNodeProp, indentNodeProp, LanguageSupport, LRLanguage, TreeIndentContext} from "@codemirror/language";
 import {styleTags, tags as t} from "@lezer/highlight";
 import {completeFromList} from "@codemirror/autocomplete";
+
+
+import {SyntaxNode} from "@lezer/common"
+
+function indentBody(context: TreeIndentContext, node: SyntaxNode) {
+    let base = context.lineIndent(node.from)
+    let line = context.lineAt(context.pos, -1), to = line.from + line.text.length
+    // Don't consider blank, deindented lines at the end of the
+    // block part of the block
+    if (!/\S/.test(line.text) &&
+        context.node.to < to + 100 &&
+        !/\S/.test(context.state.sliceDoc(to, context.node.to)) &&
+        context.lineIndent(context.pos, -1) <= base)
+        return null
+    // A normally deindenting keyword that appears at a higher
+    // indentation than the block should probably be handled by the next
+    // level
+    if (/^\s*(else:|elif |except |finally:)/.test(context.textAfter) && context.lineIndent(context.pos, -1) > base)
+        return null
+    return base + context.unit
+}
 
 export let parserWithMetadata = parser.configure({
     props: [
         indentNodeProp.add({
-            Application: delimitedIndent({closing: ")", align: false})
+            Body: context => indentBody(context, context.node) ?? context.continue(),
+            IfStatement: cx => /^\s*(else:|elif )/.test(cx.textAfter) ? cx.baseIndent : cx.continue(),
         }),
-        foldNodeProp.add({
-            Application: foldInside
-        }),
+        foldNodeProp.add({Application: foldInside}),
         styleTags({
             Identifier: t.variableName,
             Boolean: t.bool,
@@ -18,9 +38,9 @@ export let parserWithMetadata = parser.configure({
             LineComment: t.lineComment,
             "( )": t.paren
         }),
-        indentNodeProp.add({
-            Application: context => context.column(context.node.from) + context.unit
-        })
+        // indentNodeProp.add({
+        //     Application: context => context.column(context.node.from) + context.unit
+        // })
     ]
 })
 
@@ -28,7 +48,8 @@ export let parserWithMetadata = parser.configure({
 export const SEELanguage = LRLanguage.define({
     parser: parserWithMetadata,
     languageData: {
-        commentTokens: {line: ";"}
+        commentTokens: {line: "#"},
+        indentOnInput: /^\s*([\}\]\)]|else:|elif |except |finally:)$/
     }
 })
 
