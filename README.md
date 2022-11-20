@@ -4,6 +4,7 @@
 ```bash
 # After cloning repo...
 node bin/cm.js install
-npm run build
+npm run build  # to rebuild language pack and run
+npm run dev # to run dev server
 ```
-![img_1.png](img_1.png)
+![img_4.png](img_4.png)
