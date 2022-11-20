@@ -1,13 +1,15 @@
 CREATE using FORM  <type>
 ENDFORM
 VALIDATION <field>
-Given field1....fieldn EndGiven
-If field= value AND field2 !=  value OR field3 = val3
+GIVEN field1....fieldn ENDGIVEN
+# Commment line here
+IF field = value AND (field2 !=  value OR field3 = val3)
         - Set att = val
         - Set att = val
         - Set att = val
         - Set att = val
-        - Display MSG
-End
+        - DISPLAY MSG
+END
 ENDVALIDATION
 ENDCREATE
+

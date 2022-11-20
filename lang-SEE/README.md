@@ -3,7 +3,7 @@
 ```bash
 # After cloning repo...
 
-cd lang-example
+cd lang-SEE
 
 npm run prepare
 

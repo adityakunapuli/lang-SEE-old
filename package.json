@@ -1,36 +1,41 @@
 {
-    "description"    : "Development environment for the CodeMirror 6 packages",
-    "scripts"        : {
-        "test"        : "node bin/cm.js test",
-        "test-node"   : "node bin/cm.js test --no-browser",
-        "prepare"     : "node bin/cm.js build",
-        "dev"         : "node bin/cm.js devserver",
-        "rollup"      : "rollup -c lang-example/rollup.config.js",
-        "rollup2"     : "cd lang-example && lezer-generator src/syntax.grammar -o src/parser && npm run prepare && cd ..",
-        "build"       : "npm run rollup2 && npm run dev",
+    "description": "Development environment for the CodeMirror 6 packages",
+    "scripts": {
+        "test": "node bin/cm.js test",
+        "test-node": "node bin/cm.js test --no-browser",
+        "prepare": "node bin/cm.js build",
+        "dev": "node bin/cm.js devserver",
+        "rollup": "rollup -c lang-SEE/rollup.config.js",
+        "rollup2": "cd lang-SEE && lezer-generator src/syntax.grammar -o src/parser && npm run prepare && cd ..",
+        "build": "npm run rollup2 && npm run dev",
         "rebuild_lang": "npm run lezer",
-        "lezer"       : "cd lang-example/src && lezer-generator syntax.grammar -o parser.js # generates parser.terms.js"
+        "lezer": "cd lang-SEE/src && lezer-generator syntax.grammar -o parser.js # generates parser.terms.js"
     },
-    "author"         : "Aditya Kunapuli (adikunapuli@gmail.com)",
-    "license"        : "MIT",
+    "author": "Aditya Kunapuli (adikunapuli@gmail.com)",
+    "license": "MIT",
     "devDependencies": {
         "@codemirror/buildhelper": "^0.1.5",
-        "builddocs"              : "^1.0.0",
-        "esmoduleserve"          : "^0.2.0",
-        "getdocs-ts"             : "^0.1.0",
-        "serve-static"           : "^1.14.1"
+        "builddocs": "^1.0.0",
+        "esmoduleserve": "^0.2.0",
+        "getdocs-ts": "^0.1.0",
+        "serve-static": "^1.14.1"
     },
-    "repository"     : {
+    "repository": {
         "type": "git",
-        "url" : "https://github.com/adik0861/lang-see.git"
+        "url": "https://github.com/adik0861/lang-see.git"
     },
-    "workspaces"     : [
+    "workspaces": [
         "*"
     ],
-    "private"        : true,
-    "dependencies"   : {
-        "@codemirror/highlight"     : "^0.19.8",
+    "private": true,
+    "dependencies": {
+        "@angular/material": "^15.0.0",
+        "@codemirror/highlight": "^0.19.8",
         "@codemirror/theme-one-dark": "^6.1.0",
-        "rollup-plugin-ts"          : "^3.0.2"
+        "@emotion/react": "^11.10.5",
+        "@emotion/styled": "^11.10.5",
+        "@mui/material": "^5.10.14",
+        "@types/node": "^18.11.9",
+        "rollup-plugin-ts": "^3.0.2"
     }
 }

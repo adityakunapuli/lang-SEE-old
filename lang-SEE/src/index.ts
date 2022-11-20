@@ -2,8 +2,6 @@ import {parser} from "./syntax.grammar";
 import {foldInside, foldNodeProp, indentNodeProp, LanguageSupport, LRLanguage, TreeIndentContext} from "@codemirror/language";
 import {styleTags, tags as t} from "@lezer/highlight";
 import {completeFromList} from "@codemirror/autocomplete";
-
-
 import {SyntaxNode} from "@lezer/common"
 
 function indentBody(context: TreeIndentContext, node: SyntaxNode) {
@@ -35,7 +33,7 @@ export let parserWithMetadata = parser.configure({
             Identifier: t.variableName,
             Boolean: t.bool,
             String: t.string,
-            LineComment: t.lineComment,
+            Comment: t.comment,
             "( )": t.paren
         }),
         // indentNodeProp.add({
@@ -55,18 +53,18 @@ export const SEELanguage = LRLanguage.define({
 
 
 export const completions = [
-    {"label": "CREATE", "type": "keyword"},
+    {"label": "CREATE", "type": "function"},
     {"label": "FORM", "type": "keyword"},
     {"label": "ENDFORM", "type": "keyword"},
     {"label": "VALIDATION", "type": "keyword"},
     {"label": "GIVEN", "type": "keyword"},
     {"label": "ENDGIVEN", "type": "keyword"},
-    {"label": "IF", "type": "keyword"},
-    {"label": "AND", "type": "keyword"},
-    {"label": "OR", "type": "keyword"},
+    {"label": "IF", "type": "bool"},
+    {"label": "AND", "type": "bool"},
+    {"label": "OR", "type": "bool"},
     {"label": "SET", "type": "keyword"},
-    {"label": "DISPLAY MSG", "type": "keyword"},
-    {"label": "END", "type": "keyword"},
+    {"label": "DISPLAY", "type": "keyword"},
+    {"label": "END", "type": "book"},
     {"label": "ENDVALIDATION", "type": "keyword"},
     {"label": "ENDCREATE", "type": "keyword"},
     {"label": "park", "type": "constant", "info": "Test completion"},

@@ -6,4 +6,4 @@
 node bin/cm.js install
 npm run build
 ```
-![img.png](img.png)
+![img_1.png](img_1.png)
