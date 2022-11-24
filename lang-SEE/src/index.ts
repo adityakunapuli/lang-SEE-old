@@ -1,5 +1,7 @@
+// noinspection RegExpRedundantEscape,JSUnusedLocalSymbols
+
 import {parser} from "./syntax.grammar";
-import {foldInside, foldNodeProp, indentNodeProp, LanguageSupport, LRLanguage, TreeIndentContext} from "@codemirror/language";
+import {continuedIndent, foldInside, foldNodeProp, indentNodeProp, LanguageSupport, LRLanguage, TreeIndentContext} from "@codemirror/language";
 import {styleTags, tags as t} from "@lezer/highlight";
 import {completeFromList} from "@codemirror/autocomplete";
 import {SyntaxNode} from "@lezer/common"
@@ -25,10 +27,31 @@ function indentBody(context: TreeIndentContext, node: SyntaxNode) {
 export let parserWithMetadata = parser.configure({
     props: [
         indentNodeProp.add({
-            Body: context => indentBody(context, context.node) ?? context.continue(),
-            IfStatement: cx => /^\s*(else:|elif )/.test(cx.textAfter) ? cx.baseIndent : cx.continue(),
+            IfSet: continuedIndent({except: /^\s*\}/}),
+            Array: continuedIndent({except: /^\s*\]/}),
+            IfStatement: continuedIndent({except: /^\s*\}/}),
+            // IfSet: context => indentBody(context, context.node) ?? context.continue(),
+            // IfSet: cx =>  /^\s*\}$/.test(cx.textAfter) ? cx.baseIndent : cx.continue(),
+            Script: context => {
+                if (context.pos + /\s*/.exec(context.textAfter)![0].length >= context.node.to) {
+                    let endBody = null
+                    for (let cur: SyntaxNode | null = context.node, to = cur.to; ;) {
+                        cur = cur.lastChild
+                        if (!cur || cur.to != to) break
+                        if (cur.type.name == "Body") endBody = cur
+                    }
+                    if (endBody) {
+                        let bodyIndent = indentBody(context, endBody)
+                        if (bodyIndent != null) return bodyIndent
+                    }
+                }
+                return context.continue()
+            }
         }),
-        foldNodeProp.add({Application: foldInside}),
+
+        foldNodeProp.add({
+            "IfSet Object Array": foldInside
+        }),
         styleTags({
             Identifier: t.variableName,
             Boolean: t.bool,
@@ -36,9 +59,7 @@ export let parserWithMetadata = parser.configure({
             Comment: t.comment,
             "( )": t.paren
         }),
-        // indentNodeProp.add({
-        //     Application: context => context.column(context.node.from) + context.unit
-        // })
+
     ]
 })
 
@@ -47,7 +68,7 @@ export const SEELanguage = LRLanguage.define({
     parser: parserWithMetadata,
     languageData: {
         commentTokens: {line: "#"},
-        indentOnInput: /^\s*([\}\]\)]|else:|elif |except |finally:)$/
+        indentOnInput: /^\s*([\}\]\)]|else:|elif |except |finally:|set )$/
     }
 })
 
@@ -80,4 +101,6 @@ export function SEE() {
     return new LanguageSupport(SEELanguage, [SEECompletion]
     )
 }
+
+
 

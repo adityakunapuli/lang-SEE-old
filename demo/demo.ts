@@ -14,7 +14,9 @@ const myHighlightStyle = HighlightStyle.define([
     {tag: tags.number, color: "#00ff0c"},
     {tag: tags.keyword, color: "#ffaa00", fontStyle: "italic"},
     {tag: tags.bool, color: "#0095ff"},
+    {tag: tags.logicOperator, color: "#ff5400"},
     {tag: tags.comment, color: "#939598", fontStyle: "italic"}
+
 
 ])
 
@@ -34,18 +36,26 @@ function myCompletions(context: { matchBefore: (arg0: RegExp) => any; explicit: 
 
 ;(window as any).view = new EditorView({
     doc:
-        `CREATE using FORM  <type>
+`CREATE using FORM  <type>
 ENDFORM
 VALIDATION <field>
-GIVEN field1....fieldn ENDGIVEN
-# Commment line here 
-IF field = value AND (field2 !=  value OR field3 = val3)
-        - Set att = val
-        - Set att = val
-        - Set att = val
-        - Set att = val
-        - DISPLAY MSG
+GIVEN field1, file2, file3 ENDGIVEN
+
+# Creates part-picker form
+IF (A > 1 AND A < 10) OR (B=20 OR B=45)
+  - Set PartNumber = 100
+  - Set PartRevision = B
+ELSE IF X > 4
+  - Create Document
+  - Create Part
+ELSE IF X = "-"
+  - Set Doc = 10
+  - Set Dx  = 12
+ELSE
+  - Revise Document
+  - DISPLAY "Document Revised"
 END
+
 ENDVALIDATION
 ENDCREATE
     `,

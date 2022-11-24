@@ -1,22 +1,37 @@
-@top JsonText { value }
+@top Form { statement+ }
 
-value { True | False | Null | Number | String | Object | Array | Keyword | Bool}
+
+
+statement[@isGroup=Statement] {
+True |
+False |
+Null |
+Number |
+String |
+Object |
+Array |
+Keyword |
+Bool |
+IfSet {"IF" | "\- Set"} |
+IfStatement { kw<"IF"> }
+}
+
 
 String { string }
+kw<term> { @specialize[@name={term}]<string, term> }
 Object { "{" list<Property>? "}" }
-Array  { "[" list<value>? "]" }
-Property { PropertyName ":" value }
+Array  { "[" list<statement>? "]" }
+Property { PropertyName ":" statement }
 PropertyName { string }
-
 
 @tokens {
     True  { "true" }
     False { "false" }
     Null  { "null" }
     Keyword {
-    "CREATE"|"FORM"|"ENDFORM"|"VALIDATION"|"GIVEN"|"ENDGIVEN"|"SET"|"DISPLAY"|"ENDVALIDATION"|"ENDCREATE"|"SET"
+    "CREATE"|"FORM"|"ENDFORM"|"VALIDATION"|"GIVEN"|"ENDGIVEN"|"SET"|"DISPLAY"|"ENDVALIDATION"|"ENDCREATE"|"SET"|"else if"|"if"|"ELSE"|"End"|"end"|"END"|"Else If"|"ELSE IF"
     }
-    Bool {"IF"|"AND"|"OR"|"END"}
+    Bool {"AND"|"OR"}
     Comment { "#" ![\n\r]* }
     Number { '-'? int frac? exp?  }
     int  { '0' | $[1-9] @digit* }

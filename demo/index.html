@@ -14,7 +14,7 @@
             height: auto;
             border: 1px solid #ddd;
             color: white;
-            margin-top: 1em;
+            /*margin-top: 1em;*/
             background-color: rgba(0, 0, 0, 0.5);
         }
 
@@ -52,27 +52,58 @@
             Structured English Editor
         </a>
     </nav>
-    <hr class="my-hr">
+    <!--    <hr class="my-hr">-->
+    <br>
     <div class="row text-center">
         <div class="col">
-            <button class="btn btn-light buttons" id="download-btn">
+            <button class="buttons" id="download-btn">
                 <i class="fa-sharp fa-solid fa-file-arrow-down"></i>
                 Download
             </button>
         </div>
         <div class="col">
-            <button class="btn btn-light buttons" id="upload-btn">
+            <button class="buttons" id="upload-btn">
                 <i class="fa-sharp fa-solid fa-file-arrow-up"></i>
                 Upload
             </button>
         </div>
+        <div class="col">
+            <button class="buttons" id="search-btn">
+                <i class="fa-sharp fa-solid fa-search"></i>
+                Search
+            </button>
+            </div>
+            <div class="col">
+                <button class="buttons" id="btn-check">
+                    <i class="fa-solid fa-check"></i>
+                    Format
+                </button>
+            </div>
+        </div>
     </div>
-    <hr class="my-hr">
+    <!--    <hr class="my-hr">-->
     <div id="editor" class="editor"></div>
 </div>
 
+<!-- <footer> <small>&copy; Copyright {{currentYear}}, Example Corporation</small> </footer>
+-->
+
+<!-- Footer -->
+<footer class="copyright">
+    &copy; Copyright <span id="copyright-year"></span>, Plum
+</footer>
+<!-- Footer -->
+
 <script type=module src="_m/demo.js"></script>
 <script>
+    const date = new Date();
+    const year = date.getFullYear();
+    document.getElementById('copyright-year').innerHTML = "" + year;
+
+
+</script>
+<script>
+
     let dl = document.querySelector('#download-btn')
     let ul = document.querySelector('#upload-btn')
 
