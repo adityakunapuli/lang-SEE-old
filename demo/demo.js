@@ -1,5 +1,5 @@
 import { basicSetup, EditorView } from "codemirror";
-import { completions, SEE } from "../lang-SEE";
+import { completions, SEE } from "./dist/index";
 import { HighlightStyle, syntaxHighlighting } from '@codemirror/language';
 import { oneDarkTheme } from '@codemirror/theme-one-dark';
 import { tags } from "@lezer/highlight";

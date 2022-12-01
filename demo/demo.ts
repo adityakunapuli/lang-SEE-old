@@ -1,5 +1,5 @@
 import {basicSetup, EditorView} from "codemirror"
-import {completions, SEE} from "../lang-SEE"
+import {completions, SEE} from "./dist/index"
 import {HighlightStyle, syntaxHighlighting} from '@codemirror/language'
 import {oneDarkTheme} from '@codemirror/theme-one-dark'
 import {tags} from "@lezer/highlight"
@@ -33,10 +33,9 @@ function myCompletions(context: { matchBefore: (arg0: RegExp) => any; explicit: 
 }
 
 
-
 ;(window as any).view = new EditorView({
     doc:
-`CREATE using FORM  <type>
+        `CREATE using FORM  <type>
 ENDFORM
 VALIDATION <field>
 GIVEN field1, file2, file3 ENDGIVEN

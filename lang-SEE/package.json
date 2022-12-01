@@ -1,11 +1,11 @@
 {
-  "name": "codemirror-lang-EXAMPLE",
+  "name": "codemirror-lang",
   "version": "0.1.0",
-  "description": "EXAMPLE language support for CodeMirror",
+  "description": "Structured English Editor Language",
   "scripts": {
     "test": "mocha test/test.js",
     "prepare": "rollup -c",
-    "lezer" : "lezer-generator src/sytnax.grammar -o src/parser"
+    "lezer" : "lezer-generator ./src/sytnax.grammar -o ./src/parser"
   },
   "type": "module",
   "main": "dist/index.cjs",
