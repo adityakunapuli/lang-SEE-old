@@ -1,11 +1,11 @@
 {
     "description"    : "Development environment for the CodeMirror 6 packages",
     "scripts"        : {
-        "rollup_demo" : "rollup -c demo/rollup.config.js --bundleConfigAsCjs\n",
         "prepare"     : "node bin/cm.js build",
         "dev"         : "node bin/cm.js devserver",
         "rollup"      : "rollup -c lang-SEE/rollup.config.js",
         "rollup2"     : "cd lang-SEE && lezer-generator src/syntax.grammar -o src/parser && npm run prepare && cd ..",
+        "rollup3"     : "rollup -c demo/rollup.config.js --bundleConfigAsCjs",
         "build"       : "npm run rollup2 && npm run dev",
         "rebuild_lang": "npm run lezer",
         "lezer"       : "cd lang-SEE/src && lezer-generator syntax.grammar -o parser.js # generates parser.terms.js"
