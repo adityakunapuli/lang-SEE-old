@@ -13,7 +13,7 @@ exports.core = [
   "codemirror",
 ]
 exports.nonCore = [
-  "lang-javascript",
+  // "lang-javascript",
   // "lang-java",
   // "lang-json",
   // "lang-cpp",
