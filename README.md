@@ -11,7 +11,8 @@ npm run dev # to run dev server
 ```
 
 # Workflow 
-_Needs clean-up_
+If any changes are made to the language (i.e., `lang-SEE/src/synatx.grammar`), 
+run the following two rollup commands.
 
 ```bash
 # ./lang-SEE/src/index.ts -> ./demo/dist/index.ts  
