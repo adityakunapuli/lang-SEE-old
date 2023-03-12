@@ -14,6 +14,8 @@
     "license": "MIT",
     "devDependencies": {
         "@codemirror/buildhelper": "^0.1.16",
+        "@codemirror/lint": "^6.2.0",
+        "@codemirror/search": "^6.2.3",
         "builddocs": "^1.0.0",
         "esmoduleserve": "^0.2.0",
         "getdocs-ts": "^0.1.0",

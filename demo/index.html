@@ -83,20 +83,22 @@
 </div>
 <!--    <hr class="my-hr">-->
 <div id="editor" class="editor"></div>
-</div>
 <footer class="copyright"> &copy; Copyright <span id="copyright-year"></span>, Plum</footer>
 
 <script type=module src="./static/demo.js"></script>
 <!--<script type=module src="_m/demo.js"></script>-->
+<!--<script>-->
+<!--    let editor = CodeMirror.fromTextArea(document.getElementById("autoCloseTags"), {-->
+<!--        mode: 'text/html',-->
+<!--        autoCloseTags: true-->
+<!--    });-->
+<!--</script>-->
 <script>
     const date = new Date();
     const year = date.getFullYear();
     document.getElementById('copyright-year').innerHTML = "" + year;
-
-
 </script>
 <script>
-
     let dl = document.querySelector('#download-btn')
     let ul = document.querySelector('#upload-btn')
 

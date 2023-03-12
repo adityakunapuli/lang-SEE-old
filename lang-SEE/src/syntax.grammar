@@ -1,7 +1,5 @@
 @top Form { statement+ }
 
-
-
 statement[@isGroup=Statement] {
 True |
 False |
@@ -29,7 +27,8 @@ PropertyName { string }
     False { "false" }
     Null  { "null" }
     Keyword {
-    "CREATE"|"FORM"|"ENDFORM"|"VALIDATION"|"GIVEN"|"ENDGIVEN"|"SET"|"DISPLAY"|"ENDVALIDATION"|"ENDCREATE"|"SET"|"else if"|"if"|"ELSE"|"End"|"end"|"END"|"Else If"|"ELSE IF"
+    "CREATE"|"FORM"|"ENDFORM"|"VALIDATION"|"GIVEN"|"ENDGIVEN"|"SET"|"DISPLAY"|"ENDVALIDATION"|"ENDCREATE"|"SET"|"else if"|"if"|"ELSE"|"End"|"end"|"END"|"Else
+    If"|"ELSE IF"|"FOO"|"<html>"
     }
     Bool {"AND"|"OR"}
     Comment { "#" ![\n\r]* }
