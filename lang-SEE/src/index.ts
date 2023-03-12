@@ -1,10 +1,16 @@
 // noinspection RegExpRedundantEscape,JSUnusedLocalSymbols
 
 import {parser} from "./syntax.grammar";
-import {continuedIndent, foldInside, foldNodeProp, indentNodeProp, LanguageSupport, LRLanguage, TreeIndentContext} from "@codemirror/language";
+import {continuedIndent, foldInside, foldNodeProp, indentNodeProp, LanguageSupport, LRLanguage, syntaxTree, TreeIndentContext} from "@codemirror/language";
 import {styleTags, tags as t} from "@lezer/highlight";
 import {completeFromList} from "@codemirror/autocomplete";
 import {SyntaxNode} from "@lezer/common"
+
+import {elementName, htmlCompletionSourceWith, TagSpec} from "./complete"
+import {EditorView} from "@codemirror/view";
+import {EditorSelection} from "@codemirror/state";
+
+export {htmlCompletionSource, TagSpec, htmlCompletionSourceWith} from "./complete"
 
 function indentBody(context: TreeIndentContext, node: SyntaxNode) {
     let base = context.lineIndent(node.from)
@@ -69,7 +75,7 @@ export const SEELanguage = LRLanguage.define({
     languageData: {
         commentTokens: {line: "#"},
         indentOnInput: /^\s*([\}\]\)]|else:|elif |except |finally:|set )$/
-    }
+    },
 })
 
 
@@ -88,7 +94,10 @@ export const completions = [
     {"label": "END", "type": "book"},
     {"label": "ENDVALIDATION", "type": "keyword"},
     {"label": "ENDCREATE", "type": "keyword"},
-    {"label": "park", "type": "constant", "info": "Test completion"},
+    // DUMMY/TESTS
+    {"label": "FOO", "type": "keyword"},
+    {"label": "<html>", "type": "keyword"},
+    {"label": "myuser", "type": "constant", "info": "Test completion"},
     {"label": "password", "type": "variable"}
 ]
 
@@ -97,10 +106,63 @@ export const SEECompletion = SEELanguage.data.of({
     autocomplete: completeFromList(completions)
 })
 
-export function SEE() {
-    return new LanguageSupport(SEELanguage, [SEECompletion]
+export function SEE(
+    config: {
+        /// By default, the syntax tree will highlight mismatched closing
+        /// tags. Set this to `false` to turn that off (for example when you
+        /// expect to only be parsing a fragment of HTML text, not a full
+        /// document).
+        matchClosingTags?: boolean,
+        // By default, the parser does not allow arbitrary self-closing tags.
+        // Set this to `true` to turn on support for `/>` self-closing tag
+        // syntax.
+        selfClosingTags?: boolean,
+        /// Determines whether [`autoCloseTags`](#lang-html.autoCloseTags)
+        /// is included in the support extensions. Defaults to true.
+        autoCloseTags?: boolean,
+        /// Add additional tags that can be completed.
+        extraTags?: Record<string, TagSpec>,
+        /// Add additional completable attributes to all tags.
+        extraGlobalAttributes?: Record<string, null | readonly string[]>,
+
+    } = {}
+) {
+    return new LanguageSupport(SEELanguage, [SEECompletion, config.autoCloseTags !== false ? autoCloseTags : [],]
     )
 }
 
+const selfClosers = new Set(
+    "area base br col command embed frame hr img input keygen link meta param source track wbr menuitem".split(" "))
 
-
+export const autoCloseTags = EditorView.inputHandler.of((view, from, to, text) => {
+    // if (view.composing || view.state.readOnly || from != to || (text != ">" && text != "/") ||
+    //     !htmlLanguage.isActiveAt(view.state, from, -1)) return false
+    let {state} = view
+    let changes = state.changeByRange(range => {
+        let {head} = range, around = syntaxTree(state).resolveInner(head, -1), name
+        if (around.name == "TagName" || around.name == "StartTag") around = around.parent!
+        if (text == ">" && around.name == "OpenTag") {
+            if (around.parent?.lastChild?.name != "CloseTag" &&
+                (name = elementName(state.doc, around.parent, head)) &&
+                !selfClosers.has(name)) {
+                let hasRightBracket = view.state.doc.sliceString(head, head + 1) === ">";
+                let insert = `${hasRightBracket ? "" : ">"}</${name}>`
+                return {range: EditorSelection.cursor(head + 1), changes: {from: head + (hasRightBracket ? 1 : 0), insert}}
+            }
+        } else if (text == "/" && around.name == "OpenTag") {
+            let empty = around.parent, base = empty?.parent
+            if (empty!.from == head - 1 && base!.lastChild?.name != "CloseTag" &&
+                (name = elementName(state.doc, base, head)) &&
+                !selfClosers.has(name)) {
+                let hasRightBracket = view.state.doc.sliceString(head, head + 1) === ">"
+                let insert = `/${name}${hasRightBracket ? "" : ">"}`
+                let pos = head + insert.length + (hasRightBracket ? 1 : 0)
+                return {range: EditorSelection.cursor(pos), changes: {from: head, insert}}
+            }
+        }
+        return {range}
+    })
+    if (changes.changes.empty) return false
+    view.dispatch(changes, {userEvent: "input.type", scrollIntoView: true})
+    return true
+})

@@ -2630,7 +2630,7 @@ RangeValue.prototype.startSide = RangeValue.prototype.endSide = 0;
 RangeValue.prototype.point = false;
 RangeValue.prototype.mapMode = MapMode.TrackDel;
 /// A range associates a value with a range of positions.
-let Range$1 = class Range {
+class Range$1 {
     constructor(
     /// The range's start position.
     from, 
@@ -2646,7 +2646,7 @@ let Range$1 = class Range {
     static create(from, to, value) {
         return new Range$1(from, to, value);
     }
-};
+}
 function cmpRange(a, b) {
     return a.from - b.from || a.value.startSide - b.value.startSide;
 }
@@ -6441,13 +6441,13 @@ function nextToUneditable(node, offset) {
     return (offset && node.childNodes[offset - 1].contentEditable == "false" ? 1 /* NextTo.Before */ : 0) |
         (offset < node.childNodes.length && node.childNodes[offset].contentEditable == "false" ? 2 /* NextTo.After */ : 0);
 }
-let DecorationComparator$1 = class DecorationComparator {
+class DecorationComparator$1 {
     constructor() {
         this.changes = [];
     }
     compareRange(from, to) { addRange(from, to, this.changes); }
     comparePoint(from, to) { addRange(from, to, this.changes); }
-};
+}
 function findChangedDeco(a, b, diff) {
     let comp = new DecorationComparator$1;
     RangeSet.compare(a, b, diff, comp);
@@ -22520,12 +22520,373 @@ const parser = LRParser.deserialize({
   propSources: [jsonHighlighting],
   skippedNodes: [0,1],
   repeatNodeCount: 3,
-  tokenData: "2e~RnXY#PYZ#P]^#Ppq#Prs#Ust%n|}&Y}!O&_!Q!R'S!R![(b![!](s!c!d(x!e!f)Z!f!g*O!g!h*t!h!i,^!i!j,p!k!l/Q!q!r/]!u!v/c!x!y-Y!}#O/o#P#Q/t#X#Y/y#Y#Z0l#]#^.t#b#c1Z#h#i1r#o#p2Z#q#r2`~#UOj~~#XWpq#Uqr#Urs#qs#O#U#O#P#v#P;'S#U;'S;=`%h<%lO#U~#vOl~~#yXrs#U!P!Q#U#O#P#U#U#V#U#Y#Z#U#b#c#U#f#g#U#h#i#U#i#j$f~$iR!Q![$r!c!i$r#T#Z$r~$uR!Q![%O!c!i%O#T#Z%O~%RR!Q![%[!c!i%[#T#Z%[~%_R!Q![#U!c!i#U#T#Z#U~%kP;=`<%l#U~%sTP~OY%nZ]%n^;'S%n;'S;=`&S<%lO%n~&VP;=`<%l%n~&_Oo~~&bRpq&k!Q!R'S!R![(b~&nP!u!v&q~&tP#X#Y&w~&zP#h#i&}~'SOr~~'XRU~!O!P'b!g!h'v#X#Y'v~'eP!Q!['h~'mRU~!Q!['h!g!h'v#X#Y'v~'yR{|(S}!O(S!Q![(Y~(VP!Q![(Y~(_PU~!Q![(Y~(gSU~!O!P'b!Q![(b!g!h'v#X#Y'v~(xOn~~({P!p!q)O~)RP!f!g)U~)ZOa~~)^P!t!u)a~)dP!g!h)g~)jP!c!d)m~)pP!v!w)s~)vP!g!h)y~*OO`~~*RP!k!l*U~*XP!u!v*[~*_P!r!s*b~*eP!n!o*h~*kP!c!d*n~*qP!{!|)y~*wS!n!o+T!p!q+u#`#a.[#b#c.z~+WP!u!v+Z~+^P!g!h+a~+fP`~pq+i~+lP!k!l+o~+rP!h!i)y~+xP!f!g+{~,QS`~!e!f)Z!h!i,^!i!j,p!x!y-Y~,aP!q!r,d~,gP!t!u,j~,mP!o!p)y~,sP!k!l,v~,yP!x!y,|~-PP!g!h-S~-VP!p!q)y~-]P!c!d-`~-cP!n!o-f~-iP!k!l-l~-oP!f!g-r~-uP!c!d-x~-{P!v!w.O~.RP!k!l.U~.XP!q!r-S~._P#g#h.b~.eP#X#Y.h~.kPpq.n~.qP!k!l.t~.wP#Y#Z)y~.}P#W#X)y~/TP!h!i/W~/]Oq~~/`P!t!u)U~/fP!g!h/i~/lP!v!w)y~/tO^~~/yO]~~/|Q#`#a0S#b#c.z~0VP#g#h0Y~0]P#X#Y0`~0cPpq0f~0iP#]#^.t~0oP#T#U0r~0uP#`#a0x~0{P#g#h1O~1RP#X#Y1U~1ZOS~~1^P#i#j1a~1dP#`#a1g~1jP#`#a1m~1rOT~~1uP#f#g1x~1{P#i#j2O~2RP#X#Y2U~2ZOR~~2`OX~~2eOW~",
+  tokenData: "4P~RoXY#SYZ#S]^#Spq#Srs#Xst%q|}&]}!O&b!Q!R'V!R![(e![!](v!^!_({!c!d)p!e!f*R!f!g*q!g!h+g!h!i0]!i!j-c!k!l0l!q!r0w!u!v0}!x!y-{!}#O1Z#P#Q1`#X#Y1e#Y#Z2W#]#^0P#b#c2u#h#i3^#o#p3u#q#r3z~#XOj~~#[Wpq#Xqr#Xrs#ts#O#X#O#P#y#P;'S#X;'S;=`%k<%lO#X~#yOl~~#|Xrs#X!P!Q#X#O#P#X#U#V#X#Y#Z#X#b#c#X#f#g#X#h#i#X#i#j$i~$lR!Q![$u!c!i$u#T#Z$u~$xR!Q![%R!c!i%R#T#Z%R~%UR!Q![%_!c!i%_#T#Z%_~%bR!Q![#X!c!i#X#T#Z#X~%nP;=`<%l#X~%vTP~OY%qZ]%q^;'S%q;'S;=`&V<%lO%q~&YP;=`<%l%q~&bOo~~&eRpq&n!Q!R'V!R![(e~&qP!u!v&t~&wP#X#Y&z~&}P#h#i'Q~'VOr~~'[RU~!O!P'e!g!h'y#X#Y'y~'hP!Q!['k~'pRU~!Q!['k!g!h'y#X#Y'y~'|R{|(V}!O(V!Q![(]~(YP!Q![(]~(bPU~!Q![(]~(jSU~!O!P'e!Q![(e!g!h'y#X#Y'y~({On~~)OP#[#])R~)UP#h#i)X~)[P#a#b)_~)bP#`#a)e~)hP!`!a)k~)pO`~~)sP!p!q)v~)yP!f!g)|~*ROa~~*UP!t!u*X~*[P!g!h*_~*bP!c!d*e~*hP!v!w*k~*nP!g!h)k~*tP!k!l*w~*zP!u!v*}~+QP!r!s+T~+WP!n!o+Z~+^P!c!d+a~+dP!{!|)k~+jS!n!o+v!p!q,h#`#a.}#b#c0V~+yP!u!v+|~,PP!g!h,S~,XP`~pq,[~,_P!k!l,b~,eP!h!i)k~,kP!f!g,n~,sS`~!e!f*R!h!i-P!i!j-c!x!y-{~-SP!q!r-V~-YP!t!u-]~-`P!o!p)k~-fP!k!l-i~-lP!x!y-o~-rP!g!h-u~-xP!p!q)k~.OP!c!d.R~.UP!n!o.X~.[P!k!l._~.bP!f!g.e~.hP!c!d.k~.nP!v!w.q~.tP!k!l.w~.zP!q!r-u~/QP#g#h/T~/WP#X#Y/Z~/^PYZ/a~/dPpq/g~/jPpq/m~/pPpq/s~/vPpq/y~/|P!k!l0P~0SP#Y#Z)k~0YP#W#X)k~0`P!q!r0c~0fQ!q!r)k!t!u-]~0oP!h!i0r~0wOq~~0zP!t!u)|~1QP!g!h1T~1WP!v!w)k~1`O^~~1eO]~~1hQ#`#a1n#b#c0V~1qP#g#h1t~1wP#X#Y1z~1}Ppq2Q~2TP#]#^0P~2ZP#T#U2^~2aP#`#a2d~2gP#g#h2j~2mP#X#Y2p~2uOS~~2xP#i#j2{~3OP#`#a3R~3UP#`#a3X~3^OT~~3aP#f#g3d~3gP#i#j3j~3mP#X#Y3p~3uOR~~3zOX~~4POW~",
   tokenizers: [0],
   topRules: {"Form":[0,2]},
   specialized: [{term: 28, get: value => spec_string[value] || -1}],
   tokenPrec: 0
 });
+
+const Targets = ["_blank", "_self", "_top", "_parent"];
+const Charsets = ["ascii", "utf-8", "utf-16", "latin1", "latin1"];
+const Methods = ["get", "post", "put", "delete"];
+const Encs = ["application/x-www-form-urlencoded", "multipart/form-data", "text/plain"];
+const Bool = ["true", "false"];
+const S = {}; // Empty tag spec
+const Tags = {
+    a: {
+        attrs: {
+            href: null, ping: null, type: null,
+            media: null,
+            target: Targets,
+            hreflang: null
+        }
+    },
+    abbr: S,
+    address: S,
+    area: {
+        attrs: {
+            alt: null, coords: null, href: null, target: null, ping: null,
+            media: null, hreflang: null, type: null,
+            shape: ["default", "rect", "circle", "poly"]
+        }
+    },
+    article: S,
+    aside: S,
+    audio: {
+        attrs: {
+            src: null, mediagroup: null,
+            crossorigin: ["anonymous", "use-credentials"],
+            preload: ["none", "metadata", "auto"],
+            autoplay: ["autoplay"],
+            loop: ["loop"],
+            controls: ["controls"]
+        }
+    },
+    b: S,
+    base: { attrs: { href: null, target: Targets } },
+    bdi: S,
+    bdo: S,
+    blockquote: { attrs: { cite: null } },
+    body: S,
+    br: S,
+    button: {
+        attrs: {
+            form: null, formaction: null, name: null, value: null,
+            autofocus: ["autofocus"],
+            disabled: ["autofocus"],
+            formenctype: Encs,
+            formmethod: Methods,
+            formnovalidate: ["novalidate"],
+            formtarget: Targets,
+            type: ["submit", "reset", "button"]
+        }
+    },
+    canvas: { attrs: { width: null, height: null } },
+    caption: S,
+    center: S,
+    cite: S,
+    code: S,
+    col: { attrs: { span: null } },
+    colgroup: { attrs: { span: null } },
+    command: {
+        attrs: {
+            type: ["command", "checkbox", "radio"],
+            label: null, icon: null, radiogroup: null, command: null, title: null,
+            disabled: ["disabled"],
+            checked: ["checked"]
+        }
+    },
+    data: { attrs: { value: null } },
+    datagrid: { attrs: { disabled: ["disabled"], multiple: ["multiple"] } },
+    datalist: { attrs: { data: null } },
+    dd: S,
+    del: { attrs: { cite: null, datetime: null } },
+    details: { attrs: { open: ["open"] } },
+    dfn: S,
+    div: S,
+    dl: S,
+    dt: S,
+    em: S,
+    embed: { attrs: { src: null, type: null, width: null, height: null } },
+    eventsource: { attrs: { src: null } },
+    fieldset: { attrs: { disabled: ["disabled"], form: null, name: null } },
+    figcaption: S,
+    figure: S,
+    footer: S,
+    form: {
+        attrs: {
+            action: null, name: null,
+            "accept-charset": Charsets,
+            autocomplete: ["on", "off"],
+            enctype: Encs,
+            method: Methods,
+            novalidate: ["novalidate"],
+            target: Targets
+        }
+    },
+    h1: S, h2: S, h3: S, h4: S, h5: S, h6: S,
+    head: {
+        children: ["title", "base", "link", "style", "meta", "script", "noscript", "command"]
+    },
+    header: S,
+    hgroup: S,
+    hr: S,
+    html: {
+        attrs: { manifest: null }
+    },
+    i: S,
+    iframe: {
+        attrs: {
+            src: null, srcdoc: null, name: null, width: null, height: null,
+            sandbox: ["allow-top-navigation", "allow-same-origin", "allow-forms", "allow-scripts"],
+            seamless: ["seamless"]
+        }
+    },
+    img: {
+        attrs: {
+            alt: null, src: null, ismap: null, usemap: null, width: null, height: null,
+            crossorigin: ["anonymous", "use-credentials"]
+        }
+    },
+    input: {
+        attrs: {
+            alt: null, dirname: null, form: null, formaction: null,
+            height: null, list: null, max: null, maxlength: null, min: null,
+            name: null, pattern: null, placeholder: null, size: null, src: null,
+            step: null, value: null, width: null,
+            accept: ["audio/*", "video/*", "image/*"],
+            autocomplete: ["on", "off"],
+            autofocus: ["autofocus"],
+            checked: ["checked"],
+            disabled: ["disabled"],
+            formenctype: Encs,
+            formmethod: Methods,
+            formnovalidate: ["novalidate"],
+            formtarget: Targets,
+            multiple: ["multiple"],
+            readonly: ["readonly"],
+            required: ["required"],
+            type: ["hidden", "text", "search", "tel", "url", "email", "password", "datetime", "date", "month",
+                "week", "time", "datetime-local", "number", "range", "color", "checkbox", "radio",
+                "file", "submit", "image", "reset", "button"]
+        }
+    },
+    ins: { attrs: { cite: null, datetime: null } },
+    kbd: S,
+    keygen: {
+        attrs: {
+            challenge: null, form: null, name: null,
+            autofocus: ["autofocus"],
+            disabled: ["disabled"],
+            keytype: ["RSA"]
+        }
+    },
+    label: { attrs: { for: null, form: null } },
+    legend: S,
+    li: { attrs: { value: null } },
+    link: {
+        attrs: {
+            href: null, type: null,
+            hreflang: null,
+            media: null,
+            sizes: ["all", "16x16", "16x16 32x32", "16x16 32x32 64x64"]
+        }
+    },
+    map: { attrs: { name: null } },
+    mark: S,
+    menu: { attrs: { label: null, type: ["list", "context", "toolbar"] } },
+    meta: {
+        attrs: {
+            content: null,
+            charset: Charsets,
+            name: ["viewport", "application-name", "author", "description", "generator", "keywords"],
+            "http-equiv": ["content-language", "content-type", "default-style", "refresh"]
+        }
+    },
+    meter: { attrs: { value: null, min: null, low: null, high: null, max: null, optimum: null } },
+    nav: S,
+    noscript: S,
+    object: {
+        attrs: {
+            data: null, type: null, name: null, usemap: null, form: null, width: null, height: null,
+            typemustmatch: ["typemustmatch"]
+        }
+    },
+    ol: {
+        attrs: { reversed: ["reversed"], start: null, type: ["1", "a", "A", "i", "I"] },
+        children: ["li", "script", "template", "ul", "ol"]
+    },
+    optgroup: { attrs: { disabled: ["disabled"], label: null } },
+    option: { attrs: { disabled: ["disabled"], label: null, selected: ["selected"], value: null } },
+    output: { attrs: { for: null, form: null, name: null } },
+    p: S,
+    param: { attrs: { name: null, value: null } },
+    pre: S,
+    progress: { attrs: { value: null, max: null } },
+    q: { attrs: { cite: null } },
+    rp: S,
+    rt: S,
+    ruby: S,
+    samp: S,
+    script: {
+        attrs: {
+            type: ["text/javascript"],
+            src: null,
+            async: ["async"],
+            defer: ["defer"],
+            charset: Charsets
+        }
+    },
+    section: S,
+    select: {
+        attrs: {
+            form: null, name: null, size: null,
+            autofocus: ["autofocus"],
+            disabled: ["disabled"],
+            multiple: ["multiple"]
+        }
+    },
+    slot: { attrs: { name: null } },
+    small: S,
+    source: { attrs: { src: null, type: null, media: null } },
+    span: S,
+    strong: S,
+    style: {
+        attrs: {
+            type: ["text/css"],
+            media: null,
+            scoped: null
+        }
+    },
+    sub: S,
+    summary: S,
+    sup: S,
+    table: S,
+    tbody: S,
+    td: { attrs: { colspan: null, rowspan: null, headers: null } },
+    template: S,
+    textarea: {
+        attrs: {
+            dirname: null, form: null, maxlength: null, name: null, placeholder: null,
+            rows: null, cols: null,
+            autofocus: ["autofocus"],
+            disabled: ["disabled"],
+            readonly: ["readonly"],
+            required: ["required"],
+            wrap: ["soft", "hard"]
+        }
+    },
+    tfoot: S,
+    th: { attrs: { colspan: null, rowspan: null, headers: null, scope: ["row", "col", "rowgroup", "colgroup"] } },
+    thead: S,
+    time: { attrs: { datetime: null } },
+    title: S,
+    tr: S,
+    track: {
+        attrs: {
+            src: null, label: null, default: null,
+            kind: ["subtitles", "captions", "descriptions", "chapters", "metadata"],
+            srclang: null
+        }
+    },
+    ul: { children: ["li", "script", "template", "ul", "ol"] },
+    var: S,
+    video: {
+        attrs: {
+            src: null, poster: null, width: null, height: null,
+            crossorigin: ["anonymous", "use-credentials"],
+            preload: ["auto", "metadata", "none"],
+            autoplay: ["autoplay"],
+            mediagroup: ["movie"],
+            muted: ["muted"],
+            controls: ["controls"]
+        }
+    },
+    wbr: S
+};
+const GlobalAttrs = {
+    accesskey: null,
+    class: null,
+    contenteditable: Bool,
+    contextmenu: null,
+    dir: ["ltr", "rtl", "auto"],
+    draggable: ["true", "false", "auto"],
+    dropzone: ["copy", "move", "link", "string:", "file:"],
+    hidden: ["hidden"],
+    id: null,
+    inert: ["inert"],
+    itemid: null,
+    itemprop: null,
+    itemref: null,
+    itemscope: ["itemscope"],
+    itemtype: null,
+    lang: ["ar", "bn", "de", "en-GB", "en-US", "es", "fr", "hi", "id", "ja", "pa", "pt", "ru", "tr", "zh"],
+    spellcheck: Bool,
+    autocorrect: Bool,
+    autocapitalize: Bool,
+    style: null,
+    tabindex: null,
+    title: null,
+    translate: ["yes", "no"],
+    rel: ["stylesheet", "alternate", "author", "bookmark", "help", "license", "next", "nofollow", "noreferrer", "prefetch", "prev", "search", "tag"],
+    role: "alert application article banner button cell checkbox complementary contentinfo dialog document feed figure form grid gridcell heading img list listbox listitem main navigation region row rowgroup search switch tab table tabpanel textbox timer".split(" "),
+    "aria-activedescendant": null,
+    "aria-atomic": Bool,
+    "aria-autocomplete": ["inline", "list", "both", "none"],
+    "aria-busy": Bool,
+    "aria-checked": ["true", "false", "mixed", "undefined"],
+    "aria-controls": null,
+    "aria-describedby": null,
+    "aria-disabled": Bool,
+    "aria-dropeffect": null,
+    "aria-expanded": ["true", "false", "undefined"],
+    "aria-flowto": null,
+    "aria-grabbed": ["true", "false", "undefined"],
+    "aria-haspopup": Bool,
+    "aria-hidden": Bool,
+    "aria-invalid": ["true", "false", "grammar", "spelling"],
+    "aria-label": null,
+    "aria-labelledby": null,
+    "aria-level": null,
+    "aria-live": ["off", "polite", "assertive"],
+    "aria-multiline": Bool,
+    "aria-multiselectable": Bool,
+    "aria-owns": null,
+    "aria-posinset": null,
+    "aria-pressed": ["true", "false", "mixed", "undefined"],
+    "aria-readonly": Bool,
+    "aria-relevant": null,
+    "aria-required": Bool,
+    "aria-selected": ["true", "false", "undefined"],
+    "aria-setsize": null,
+    "aria-sort": ["ascending", "descending", "none", "other"],
+    "aria-valuemax": null,
+    "aria-valuemin": null,
+    "aria-valuenow": null,
+    "aria-valuetext": null
+};
+const eventAttributes = ("beforeunload copy cut dragstart dragover dragleave dragenter dragend " +
+    "drag paste focus blur change click load mousedown mouseenter mouseleave " +
+    "mouseup keydown keyup resize scroll unload").split(" ").map(n => "on" + n);
+for (let a of eventAttributes)
+    GlobalAttrs[a] = null;
+class Schema {
+    constructor(extraTags, extraAttrs) {
+        this.tags = Object.assign(Object.assign({}, Tags), extraTags);
+        this.globalAttrs = Object.assign(Object.assign({}, GlobalAttrs), extraAttrs);
+        this.allTags = Object.keys(this.tags);
+        this.globalAttrNames = Object.keys(this.globalAttrs);
+    }
+}
+Schema.default = new Schema;
+function elementName(doc, tree, max = doc.length) {
+    if (!tree)
+        return "";
+    let tag = tree.firstChild;
+    let name = tag && tag.getChild("TagName");
+    return name ? doc.sliceString(name.from, Math.min(name.to, max)) : "";
+}
 
 // noinspection RegExpRedundantEscape,JSUnusedLocalSymbols
 function indentBody(context, node) {
@@ -22589,7 +22950,7 @@ const SEELanguage = LRLanguage.define({
     languageData: {
         commentTokens: { line: "#" },
         indentOnInput: /^\s*([\}\]\)]|else:|elif |except |finally:|set )$/
-    }
+    },
 });
 const completions = [
     { "label": "CREATE", "type": "function" },
@@ -22606,15 +22967,55 @@ const completions = [
     { "label": "END", "type": "book" },
     { "label": "ENDVALIDATION", "type": "keyword" },
     { "label": "ENDCREATE", "type": "keyword" },
-    { "label": "park", "type": "constant", "info": "Test completion" },
+    // DUMMY/TESTS
+    { "label": "FOO", "type": "keyword" },
+    { "label": "<html>", "type": "keyword" },
+    { "label": "myuser", "type": "constant", "info": "Test completion" },
     { "label": "password", "type": "variable" }
 ];
 const SEECompletion = SEELanguage.data.of({
     autocomplete: completeFromList(completions)
 });
-function SEE() {
-    return new LanguageSupport(SEELanguage, [SEECompletion]);
+function SEE(config = {}) {
+    return new LanguageSupport(SEELanguage, [SEECompletion, config.autoCloseTags !== false ? autoCloseTags : [],]);
 }
+const selfClosers = new Set("area base br col command embed frame hr img input keygen link meta param source track wbr menuitem".split(" "));
+const autoCloseTags = EditorView.inputHandler.of((view, from, to, text) => {
+    // if (view.composing || view.state.readOnly || from != to || (text != ">" && text != "/") ||
+    //     !htmlLanguage.isActiveAt(view.state, from, -1)) return false
+    let { state } = view;
+    let changes = state.changeByRange(range => {
+        var _a, _b, _c;
+        let { head } = range, around = syntaxTree(state).resolveInner(head, -1), name;
+        if (around.name == "TagName" || around.name == "StartTag")
+            around = around.parent;
+        if (text == ">" && around.name == "OpenTag") {
+            if (((_b = (_a = around.parent) === null || _a === void 0 ? void 0 : _a.lastChild) === null || _b === void 0 ? void 0 : _b.name) != "CloseTag" &&
+                (name = elementName(state.doc, around.parent, head)) &&
+                !selfClosers.has(name)) {
+                let hasRightBracket = view.state.doc.sliceString(head, head + 1) === ">";
+                let insert = `${hasRightBracket ? "" : ">"}</${name}>`;
+                return { range: EditorSelection.cursor(head + 1), changes: { from: head + (hasRightBracket ? 1 : 0), insert } };
+            }
+        }
+        else if (text == "/" && around.name == "OpenTag") {
+            let empty = around.parent, base = empty === null || empty === void 0 ? void 0 : empty.parent;
+            if (empty.from == head - 1 && ((_c = base.lastChild) === null || _c === void 0 ? void 0 : _c.name) != "CloseTag" &&
+                (name = elementName(state.doc, base, head)) &&
+                !selfClosers.has(name)) {
+                let hasRightBracket = view.state.doc.sliceString(head, head + 1) === ">";
+                let insert = `/${name}${hasRightBracket ? "" : ">"}`;
+                let pos = head + insert.length + (hasRightBracket ? 1 : 0);
+                return { range: EditorSelection.cursor(pos), changes: { from: head, insert } };
+            }
+        }
+        return { range };
+    });
+    if (changes.changes.empty)
+        return false;
+    view.dispatch(changes, { userEvent: "input.type", scrollIntoView: true });
+    return true;
+});
 
 // Using https://github.com/one-dark/vscode-one-dark-theme/ as reference for the colors
 const ivory = "#abb2bf", stone = "#7d8799", // Brightened compared to original to increase contrast
