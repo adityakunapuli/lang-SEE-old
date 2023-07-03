@@ -108,26 +108,16 @@ export const SEECompletion = SEELanguage.data.of({
 
 export function SEE(
     config: {
-        /// By default, the syntax tree will highlight mismatched closing
-        /// tags. Set this to `false` to turn that off (for example when you
-        /// expect to only be parsing a fragment of HTML text, not a full
-        /// document).
-        matchClosingTags?: boolean,
-        // By default, the parser does not allow arbitrary self-closing tags.
-        // Set this to `true` to turn on support for `/>` self-closing tag
-        // syntax.
-        selfClosingTags?: boolean,
-        /// Determines whether [`autoCloseTags`](#lang-html.autoCloseTags)
-        /// is included in the support extensions. Defaults to true.
-        autoCloseTags?: boolean,
-        /// Add additional tags that can be completed.
-        extraTags?: Record<string, TagSpec>,
-        /// Add additional completable attributes to all tags.
-        extraGlobalAttributes?: Record<string, null | readonly string[]>,
-
+        // =================================================
+        // these are all config values that can be passed
+        // into the instance using in the html file--e.g.,
+        // =================================================
+        // matchClosingTags?: boolean,
+        // selfClosingTags?: boolean,
+        // extraTags?: Record<string, TagSpec>,
     } = {}
 ) {
-    return new LanguageSupport(SEELanguage, [SEECompletion, config.autoCloseTags !== false ? autoCloseTags : [],]
+    return new LanguageSupport(SEELanguage, [SEECompletion, autoCloseTags,]
     )
 }
 
